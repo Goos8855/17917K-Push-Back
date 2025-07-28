@@ -5,6 +5,7 @@
 #include "liblvgl/core/lv_obj_pos.h"
 #include "liblvgl/widgets/lv_btn.h"
 #include "liblvgl/widgets/lv_label.h"
+#include "pros/misc.h"
 #include "pros/misc.hpp"
 #include "pros/motor_group.hpp"
 #include "liblvgl/lvgl.h"
@@ -15,6 +16,7 @@ pros::MotorGroup frontLeft({7,8});
 pros::MotorGroup frontRight({-19,-20});
 pros::MotorGroup backLeft({9,10});
 pros::MotorGroup backRight({-17,-18});
+pros::MotorGroup Intake({11});
 
 //initialize home gui
 void init_gui(){
@@ -48,6 +50,9 @@ void opcontrol() {
     frontRight.move(Y - X - R);
     backLeft.move(Y - X + R);
     backRight.move(Y + X - R);
+
+    Intake.move(master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
+
 
     pros::delay(10);
   }
